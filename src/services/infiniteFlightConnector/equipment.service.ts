@@ -13,6 +13,10 @@ export class EquipmentService {
 
   async getAllEquipment(): Promise<any> {
     try {
+      console.log(
+        `Request URL: '/aircraft/liveries'\nHeaders: ${JSON.stringify(this.httpClient.defaults.headers.common)}`,
+      );
+
       const response = await this.httpClient.get('/aircraft/liveries');
       return response.data;
     } catch (error) {

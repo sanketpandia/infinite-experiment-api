@@ -72,20 +72,26 @@ export class LiveFlightsService {
 
       liveFlightsWithPlans = await Promise.all(
         liveFlights.map(async (flight: LiveFlightDto) => {
-          const { result, errorCode } =
-            await this.liveFlightsService.getFlightPlan(
-              infiniteFlightServerId,
-              flight.flightId,
-            );
+          try {
+            const { result, errorCode } =
+              await this.liveFlightsService.getFlightPlan(
+                infiniteFlightServerId,
+                flight.flightId,
+              );
 
-          if (errorCode) {
+            if (errorCode) {
+              return flight;
+            }
+            if (result.waypoints) flight.waypoints = result.waypoints;
+            return flight;
+          } catch (error) {
+            console.log(`Error occured for ${flight.callsign}`);
             return flight;
           }
-          flight.waypoints = result.waypoints;
-          return flight;
         }),
       );
     } catch (error) {
+      throw error;
       throw new InternalServerErrorException(error.message);
     }
 

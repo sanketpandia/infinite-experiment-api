@@ -13,6 +13,9 @@ export class SessionsService {
 
   async getSessions(): Promise<any> {
     try {
+      console.log(
+        `Request URL: ${'/sessions'}\nHeaders: ${JSON.stringify(this.httpClient.defaults.headers.common)}`,
+      );
       const response = await this.httpClient.get('/sessions');
       return response.data;
     } catch (error) {
