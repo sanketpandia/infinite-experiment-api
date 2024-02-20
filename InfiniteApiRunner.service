@@ -1,0 +1,10 @@
+[Unit]
+Description=The Infinite Experiment bot
+
+[Service]
+User=root
+WorkingDirectory=/root/projects/infinite-experiment-bot
+ExecStart=/bin/bash -c "npm run build && npm start:prod"
+Restart=always
+
+[Install]
