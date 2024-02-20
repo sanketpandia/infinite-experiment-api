@@ -1,0 +1,12 @@
+{
+    "770289800779268126" : {
+        "serverName": "AirF & KL_M",
+        "callsignPattern": "___AK",
+        "serverPreference": "Expert"
+    },
+    "790634557228711956": {
+        "callsignPattern": "___AK",
+        "serverName": "ExperimentDevZone",
+        "serverPreference": "Training"
+    }
+}

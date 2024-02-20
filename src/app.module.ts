@@ -1,14 +1,35 @@
+// app.module.ts
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LiveFlightsController } from './live-flights/live-flights.controller';
 import { LiveFlightsModule } from './live-flights/live-flights.module';
-import { BotIdentificationMiddleware } from './middlewares/BotIdentificationMiddleware';
+import { DiscordLoggerService } from './services/errorHandlers/discordErrorHandler.service';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptionsFilter } from './services/errorHandlers/allExceptionsFilter';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './services/authService/auth.module'; // Import AuthModule
+import { BotIdentificationMiddleware } from './services/authService/BotIdentification.middleware';
 
 @Module({
-  imports: [LiveFlightsModule],
+  imports: [
+    LiveFlightsModule,
+    HttpModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+    AuthModule, // Include AuthModule
+  ],
   controllers: [AppController, LiveFlightsController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    DiscordLoggerService,
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
