@@ -15,7 +15,6 @@ export class InfiniteFlightService {
 
     // Set default headers
     const apiKey = this.configService.get<string>('IF_API_KEY');
-    console.log('API Key: ' + apiKey);
     if (apiKey) {
       this.httpClient.defaults.headers.common['Authorization'] =
         `Bearer ${apiKey}`;
@@ -28,6 +27,9 @@ export class InfiniteFlightService {
 
   // Method to expose the Axios instance
   getHttpClient(): AxiosInstance {
+    console.log(
+      'Axios client provided | Base URL: ' + this.httpClient.getUri(),
+    );
     return this.httpClient;
   }
 }

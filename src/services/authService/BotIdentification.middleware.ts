@@ -20,6 +20,7 @@ export class BotIdentificationMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const isBotRequest = req.headers['x-request-type'] === RequestType.BOT;
     const apiKey = req.headers['x-bot-token'] as string;
+    console.log(req.path);
     if (isBotRequest) {
       if (!apiKey || !this.authService.validateApiKey(apiKey)) {
         throw new UnauthorizedException('Unauthorized');

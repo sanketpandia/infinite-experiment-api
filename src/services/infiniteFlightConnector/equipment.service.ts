@@ -4,29 +4,16 @@ import { AxiosInstance } from 'axios';
 import { InfiniteFlightService } from './ccommon.service';
 
 @Injectable()
-export class LiveFlightService {
+export class EquipmentService {
   private readonly httpClient: AxiosInstance;
 
   constructor(private readonly infiniteFlightService: InfiniteFlightService) {
     this.httpClient = this.infiniteFlightService.getHttpClient();
   }
 
-  async getAllFlights(sessionId: string): Promise<any> {
+  async getAllEquipment(): Promise<any> {
     try {
-      const response = await this.httpClient.get(
-        `/sessions/${sessionId}/flights`,
-      );
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getFlightPlan(sessionId: string, flightId: string): Promise<any> {
-    try {
-      const response = await this.httpClient.get(
-        `sessions/${sessionId}/flights/${flightId}/flightplan`,
-      );
+      const response = await this.httpClient.get('/aircraft/liveries');
       return response.data;
     } catch (error) {
       throw error;

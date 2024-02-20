@@ -11,6 +11,7 @@ import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './services/authService/auth.module'; // Import AuthModule
 import { BotIdentificationMiddleware } from './services/authService/BotIdentification.middleware';
+import { StartupModule } from './services/startupServices/startupServices.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BotIdentificationMiddleware } from './services/authService/BotIdentific
       envFilePath: '.env',
     }),
     AuthModule, // Include AuthModule
+    StartupModule,
   ],
   controllers: [AppController, LiveFlightsController],
   providers: [
