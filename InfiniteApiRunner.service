@@ -3,7 +3,7 @@ Description=The Infinite Experiment bot
 
 [Service]
 User=root
-WorkingDirectory=/root/projects/infinite-experiment-bot
+WorkingDirectory=/root/projects/infinite-experiment-api
 ExecStart=/bin/bash -c "npm run build && npm start:prod"
 Restart=always
 
