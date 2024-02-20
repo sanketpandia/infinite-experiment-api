@@ -8,3 +8,4 @@ ExecStart=/bin/bash -c "npm run build && npm start:prod"
 Restart=always
 
 [Install]
+WantedBy=multi-user.target
