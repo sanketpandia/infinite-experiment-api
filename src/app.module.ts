@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './services/authService/auth.module'; // Import AuthModule
 import { BotIdentificationMiddleware } from './services/authService/BotIdentification.middleware';
 import { StartupModule } from './services/startupServices/startupServices.module';
+import { PilotsModule } from './pilots/pilots.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { StartupModule } from './services/startupServices/startupServices.module
     }),
     AuthModule, // Include AuthModule
     StartupModule,
+    PilotsModule,
   ],
   controllers: [AppController, LiveFlightsController],
   providers: [
